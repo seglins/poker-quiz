@@ -10,9 +10,10 @@ export default {
 			},
 			colors: {
 				primary: '#2F80ED',
-				danger: '#EB5757',
+				destructive: '#EB5757',
 				neutral: {
-					light: '#C8C8C8',
+					light: '#E9E9E9',
+					DEFAULT: '#C8C8C8',
 					dark: '#8E8E8E'
 				}
 			}
@@ -25,12 +26,7 @@ export default {
 					fontSize: '14px'
 				},
 				body: {
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					flexDirection: 'column',
-					minHeight: '100vh',
-					padding: `${theme('spacing.8')} ${theme('spacing.4')}`
+					padding: `${theme('spacing.10')} ${theme('spacing.6')}`
 				}
 			});
 		})
