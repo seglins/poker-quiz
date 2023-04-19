@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import io, { Socket } from 'socket.io-client';
 	import { Event, type Player } from '@poker-quiz/lib/types';
-
+	import { PUBLIC_API_URL } from '$env/static/public';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
 
@@ -18,7 +18,7 @@
 	$: player = { name, answer } as Player;
 
 	onMount(() => {
-		socket = io('http://localhost:3000');
+		socket = io(PUBLIC_API_URL);
 	});
 
 	const showAnswerForm = () => (isAnswerFormVisible = true);
