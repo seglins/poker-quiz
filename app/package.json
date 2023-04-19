@@ -1,5 +1,5 @@
 {
-	"name": "app",
+	"name": "@poker-quiz/app",
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
@@ -32,6 +32,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@poker-quiz/lib": "workspace:*",
 		"socket.io-client": "^4.6.1"
 	}
 }

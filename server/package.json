@@ -1,6 +1,7 @@
 {
-	"name": "server",
+	"name": "@poker-quiz/server",
 	"version": "1.0.0",
+	"private": true,
 	"description": "",
 	"main": "index.js",
 	"scripts": {
@@ -19,6 +20,7 @@
 		"typescript": "^5.0.0"
 	},
 	"dependencies": {
+		"@poker-quiz/lib": "workspace:*",
 		"express": "^4.18.2",
 		"socket.io": "^4.6.1"
 	}
