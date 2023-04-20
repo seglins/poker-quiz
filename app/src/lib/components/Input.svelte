@@ -1,9 +1,10 @@
 <script lang="ts">
-	export let large: boolean = false;
-	export let disabled: boolean = false;
-	export let placeholder: string = '';
+	export let large = false;
+	export let disabled = false;
+	export let placeholder = '';
 	export let value: string | number = '';
-	export let type: string = 'text';
+	export let type = 'text';
+	export let name = '';
 
 	export const largeClasses = 'text-2xl min-h-[100px] text-center';
 
@@ -12,6 +13,7 @@
 
 <input
 	on:input={handleChange}
+	{name}
 	{value}
 	{type}
 	{disabled}
