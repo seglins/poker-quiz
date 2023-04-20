@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let variant: 'primary' | 'destructive' = 'primary';
-	export let disabled: boolean = false;
+	export let disabled = false;
 </script>
 
 <button
