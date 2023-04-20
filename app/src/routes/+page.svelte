@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import io, { Socket } from 'socket.io-client';
-	import { Event, type Player } from '@poker-quiz/lib/types';
+	import { SocketEvent, type Player } from '@poker-quiz/lib/types';
 	import { PUBLIC_API_URL } from '$env/static/public';
 	import Button from '$lib/components/Button.svelte';
 	import Input from '$lib/components/Input.svelte';
@@ -24,12 +24,12 @@
 	const showAnswerForm = () => (isAnswerFormVisible = true);
 
 	const submit = () => {
-		socket.emit(Event.SUBMIT, player);
+		socket.emit(SocketEvent.SUBMIT, player);
 		hasAnswered = true;
 	};
 
 	const discard = () => {
-		socket.emit(Event.DISCARD);
+		socket.emit(SocketEvent.DISCARD);
 		hasDiscarded = true;
 	};
 </script>

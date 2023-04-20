@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
-import { Event, Player, PlayerWithID } from '@poker-quiz/lib/types';
+import { SocketEvent, Player, PlayerWithID } from '@poker-quiz/lib/types';
 import { verifyToken } from './middleware';
 
 dotenv.config({ path: path.resolve('../.env') });
@@ -31,11 +31,11 @@ io.on('connection', (socket) => {
 
 	console.log(`${id} connected`);
 
-	socket.on(Event.SUBMIT, (player: Player) => {
+	socket.on(SocketEvent.SUBMIT, (player: Player) => {
 		players.push({ id, ...player });
 	});
 
-	socket.on(Event.DISCARD, () => {
+	socket.on(SocketEvent.DISCARD, () => {
 		players = players.map((player) => {
 			if (id === player.id) {
 				return {

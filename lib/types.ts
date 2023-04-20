@@ -1,4 +1,4 @@
-export enum Event {
+export enum SocketEvent {
 	SUBMIT = 'submit',
 	DISCARD = 'discard',
 }
