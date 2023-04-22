@@ -19,7 +19,7 @@ export const actions = {
 		}
 
 		event.cookies.set(PUBLIC_AUTH_TOKEN_COOKIE_KEY, token, {
-			path: '/',
+			path: '/admin',
 			httpOnly: true,
 			sameSite: 'strict',
 			secure: process.env.NODE_ENV === 'production',
