@@ -22,4 +22,6 @@ export async function load({ url, cookies, fetch }) {
 	if (isLoginPage && response.ok) {
 		throw redirect(303, '/admin');
 	}
+
+	return { token };
 }
