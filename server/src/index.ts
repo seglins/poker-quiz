@@ -111,7 +111,7 @@ app.get('/admin/auth', verifyAuthToken, (req: Request, res: Response) => {
 	res.sendStatus(200);
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT ?? 3000;
 
 server.listen(PORT, () => {
 	console.log(`Running on ${PORT}`);
