@@ -1,4 +1,16 @@
 {
 	"name": "@poker-quiz/lib",
-	"private": true
+	"private": true,
+	"main": "./build/index.js",
+	"types": "./build/index.d.ts",
+	"exports": {
+		"import": "./build/esm/index.js",
+		"require": "./build/cjs/index.js"
+	},
+	"scripts": {
+		"build": "tsc --module commonjs --outDir ./build/cjs && tsc --module es6 --outDir ./build/esm"
+	},
+	"devDependencies": {
+		"typescript": "^5.0.0"
+	}
 }
