@@ -3,10 +3,11 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
+		"lib:build": "pnpm --filter lib build",
 		"app:dev": "pnpm --filter app dev",
-		"app:build": "pnpm --filter app build",
+		"app:build": "pnpm install && pnpm lib:build && pnpm --filter app build",
 		"server:dev": "pnpm --filter server dev",
-		"server:build": "pnpm --filter server build",
+		"server:build": "pnpm install && pnpm lib:build && pnpm --filter server build",
 		"server:start": "pnpm --filter server start"
 	},
 	"keywords": [],
