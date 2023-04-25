@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import type { IdentifiedPlayer } from '@poker-quiz/lib/types';
+	import type { IdentifiedPlayer } from '@poker-quiz/lib';
 	import { players } from '$lib/stores';
 
 	let player: IdentifiedPlayer | null;

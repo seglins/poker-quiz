@@ -4,7 +4,7 @@
 		SocketEvent,
 		type IdentifiedPlayer,
 		type SocketEventGetPlayersResponse
-	} from '@poker-quiz/lib/types';
+	} from '@poker-quiz/lib';
 	import { players, socket } from '$lib/stores';
 
 	onMount(() => {

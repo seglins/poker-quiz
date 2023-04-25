@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { SocketEvent } from '@poker-quiz/lib/types';
+	import { SocketEvent } from '@poker-quiz/lib';
 	import { players, socket } from '$lib/stores';
 	import Button from '$lib/components/Button.svelte';
 

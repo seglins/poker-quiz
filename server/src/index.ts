@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { Server } from 'socket.io';
 import jwt from 'jsonwebtoken';
-import { SocketEvent, Player, IdentifiedPlayer } from '@poker-quiz/lib/types';
+import { SocketEvent, Player, IdentifiedPlayer } from '@poker-quiz/lib';
 import { verifyAuthToken } from './middleware';
 
 dotenv.config({ path: path.resolve('../.env') });
