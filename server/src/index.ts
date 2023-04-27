@@ -63,16 +63,9 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on(SocketEvent.PLAYER_FOLD, () => {
-		players = players.map((player) => {
-			if (socket.id === player.id) {
-				return {
-					...player,
-					hasFolded: true,
-				};
-			}
-
-			return player;
-		});
+		players = players.map((player) =>
+			socket.id === player.id ? { ...player, hasFolded: true } : player
+		);
 
 		io.to(admins).emit(SocketEvent.PLAYER_FOLDED, socket.id);
 	});

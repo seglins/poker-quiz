@@ -23,16 +23,7 @@
 
 			socket?.on(SocketEvent.PLAYER_FOLDED, (id: string) => {
 				players.set(
-					$players.map((player) => {
-						if (player.id === id) {
-							return {
-								...player,
-								hasFolded: true
-							};
-						}
-
-						return player;
-					})
+					$players.map((player) => (player.id === id ? { ...player, hasFolded: true } : player))
 				);
 			});
 
