@@ -17,17 +17,17 @@
 				players.set([...$players, newPlayer]);
 			});
 
-			socket?.on(SocketEvent.PLAYER_SUBMITTED, (id: string, answer: string) => {
+			socket?.on(SocketEvent.PLAYER_ANSWERED, (id: string, answer: string) => {
 				players.set($players.map((player) => (player.id === id ? { ...player, answer } : player)));
 			});
 
-			socket?.on(SocketEvent.PLAYER_DISCARDED, (id: string) => {
+			socket?.on(SocketEvent.PLAYER_FOLDED, (id: string) => {
 				players.set(
 					$players.map((player) => {
 						if (player.id === id) {
 							return {
 								...player,
-								hasDiscarded: true
+								hasFolded: true
 							};
 						}
 

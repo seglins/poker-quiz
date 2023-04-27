@@ -54,27 +54,27 @@ io.on('connection', (socket) => {
 		io.to(admins).emit(SocketEvent.PLAYER_ENTERED, newPlayer);
 	});
 
-	socket.on(SocketEvent.PLAYER_SUBMIT, (answer: string) => {
+	socket.on(SocketEvent.PLAYER_ANSWER, (answer: string) => {
 		players = players.map((player) =>
 			player.id === socket.id ? { ...player, answer } : player
 		);
 
-		io.to(admins).emit(SocketEvent.PLAYER_SUBMITTED, socket.id, answer);
+		io.to(admins).emit(SocketEvent.PLAYER_ANSWERED, socket.id, answer);
 	});
 
-	socket.on(SocketEvent.PLAYER_DISCARD, () => {
+	socket.on(SocketEvent.PLAYER_FOLD, () => {
 		players = players.map((player) => {
 			if (socket.id === player.id) {
 				return {
 					...player,
-					hasDiscarded: true,
+					hasFolded: true,
 				};
 			}
 
 			return player;
 		});
 
-		io.to(admins).emit(SocketEvent.PLAYER_DISCARDED, socket.id);
+		io.to(admins).emit(SocketEvent.PLAYER_FOLDED, socket.id);
 	});
 
 	socket.on(SocketEvent.GET_PLAYERS, (callback) => {

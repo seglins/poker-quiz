@@ -10,24 +10,24 @@
 		answer: '',
 		hasEntered: false,
 		hasAnswered: false,
-		hasDiscarded: false
+		hasFolded: false
 	};
 
 	let player: Player = { ...initialPlayer };
 
-	const submit = () => {
-		$socket?.emit(SocketEvent.PLAYER_SUBMIT, player.answer);
-		player.hasAnswered = true;
-	};
-
-	const discard = () => {
-		$socket?.emit(SocketEvent.PLAYER_DISCARD);
-		player.hasDiscarded = true;
-	};
-
 	const enter = () => {
 		$socket?.emit(SocketEvent.PLAYER_ENTER, player.name);
 		player.hasEntered = true;
+	};
+
+	const answer = () => {
+		$socket?.emit(SocketEvent.PLAYER_ANSWER, player.answer);
+		player.hasAnswered = true;
+	};
+
+	const fold = () => {
+		$socket?.emit(SocketEvent.PLAYER_FOLD);
+		player.hasFolded = true;
 	};
 
 	const reset = () => {
@@ -52,15 +52,15 @@
 		{#if player.hasEntered && player.name}
 			<Input
 				bind:value={player.answer}
-				disabled={player.hasDiscarded}
+				disabled={player.hasFolded}
 				placeholder="Tava atbilde"
 				large
 			/>
-			<Button on:click={submit} disabled={!player.answer || player.hasAnswered}>Iesūtīt</Button>
+			<Button on:click={answer} disabled={!player.answer || player.hasAnswered}>Iesūtīt</Button>
 			<Button
-				on:click={discard}
+				on:click={fold}
 				variant="destructive"
-				disabled={!player.answer || !player.hasAnswered || player.hasDiscarded}>Atmest</Button
+				disabled={!player.answer || !player.hasAnswered || player.hasFolded}>Atmest</Button
 			>
 		{:else}
 			<Input bind:value={player.name} placeholder="Vārds Uzvārds" />

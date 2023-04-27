@@ -24,8 +24,8 @@
 	{#if player.answer}
 		<p
 			class="text-4xl font-bold"
-			class:text-destructive={player.hasDiscarded}
-			class:opacity-50={player.hasDiscarded}
+			class:text-destructive={player.hasFolded}
+			class:opacity-50={player.hasFolded}
 		>
 			{player.answer}
 		</p>
