@@ -30,14 +30,16 @@
 		player.hasFolded = true;
 	};
 
-	const reset = () => {
-		player = { ...initialPlayer };
-	};
-
 	onMount(() => {
 		socket.subscribe((socket) => {
 			socket?.on(SocketEvent.PLAYER_REMOVED, () => {
-				reset();
+				player = { ...initialPlayer };
+			});
+
+			socket?.on(SocketEvent.ANSWERS_CLEARED, () => {
+				player.answer = '';
+				player.hasAnswered = false;
+				player.hasFolded = false;
 			});
 		});
 	});

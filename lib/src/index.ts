@@ -9,6 +9,8 @@ export enum SocketEvent {
 	PLAYERS_REMOVED = 'players:removed',
 	PLAYER_REMOVED = 'player:removed',
 	GET_PLAYERS = 'players:get',
+	CLEAR_ANSWERS = 'answers:clear',
+	ANSWERS_CLEARED = 'answers:cleared',
 }
 
 export type SocketEventGetPlayersResponse = {

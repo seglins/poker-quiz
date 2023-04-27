@@ -27,6 +27,10 @@
 				);
 			});
 
+			socket?.on(SocketEvent.ANSWERS_CLEARED, () => {
+				players.set($players.map(({ id, name }) => ({ id, name })));
+			});
+
 			socket?.on(SocketEvent.PLAYERS_REMOVED, (ids?: string[]) => {
 				players.set(ids ? $players.filter((player) => !ids.includes(player.id)) : []);
 			});

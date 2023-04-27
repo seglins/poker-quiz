@@ -6,6 +6,10 @@
 	const removePlayers = (ids?: string[]) => {
 		$socket?.emit(SocketEvent.REMOVE_PLAYERS, ids);
 	};
+
+	const clearAnswers = () => {
+		$socket?.emit(SocketEvent.CLEAR_ANSWERS);
+	};
 </script>
 
 <h2 class="text-3xl font-bold mb-6">Spēlētāji</h2>
@@ -22,4 +26,9 @@
 	{/each}
 </ul>
 
-<Button on:click={() => removePlayers()}>Dzēst Atbildes</Button>
+<div class="flex flex-col gap-4">
+	<Button on:click={clearAnswers} disabled={!$players.length}>Dzēst Atbildes</Button>
+	<Button on:click={() => removePlayers()} variant="destructive" disabled={!$players.length}>
+		Dzēst Spēlētājus
+	</Button>
+</div>

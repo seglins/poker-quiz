@@ -76,6 +76,12 @@ io.on('connection', (socket) => {
 		}
 	});
 
+	socket.on(SocketEvent.CLEAR_ANSWERS, () => {
+		players = players.map(({ id, name }) => ({ id, name }));
+		io.to(admins).emit(SocketEvent.ANSWERS_CLEARED, players);
+		io.to(players.map(({ id }) => id)).emit(SocketEvent.ANSWERS_CLEARED);
+	});
+
 	socket.on(SocketEvent.REMOVE_PLAYERS, (ids?: string[]) => {
 		if (isAdmin) {
 			const playerIds = players.map(({ id }) => id);
