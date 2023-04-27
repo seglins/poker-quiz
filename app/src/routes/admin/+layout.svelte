@@ -13,8 +13,12 @@
 				players.set(response.players);
 			});
 
-			socket?.on(SocketEvent.PLAYER_SUBMITTED, (newPlayer: IdentifiedPlayer) => {
+			socket?.on(SocketEvent.PLAYER_ENTERED, (newPlayer: IdentifiedPlayer) => {
 				players.set([...$players, newPlayer]);
+			});
+
+			socket?.on(SocketEvent.PLAYER_SUBMITTED, (id: string, answer: string) => {
+				players.set($players.map((player) => (player.id === id ? { ...player, answer } : player)));
 			});
 
 			socket?.on(SocketEvent.PLAYER_DISCARDED, (id: string) => {

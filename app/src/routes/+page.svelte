@@ -8,28 +8,30 @@
 	const initialPlayer: Player = {
 		name: '',
 		answer: '',
+		hasEntered: false,
 		hasAnswered: false,
 		hasDiscarded: false
 	};
 
 	let player: Player = { ...initialPlayer };
-	let isAnswerForm = false;
 
 	const submit = () => {
+		$socket?.emit(SocketEvent.PLAYER_SUBMIT, player.answer);
 		player.hasAnswered = true;
-		$socket?.emit(SocketEvent.PLAYER_SUBMIT, player);
 	};
 
 	const discard = () => {
+		$socket?.emit(SocketEvent.PLAYER_DISCARD);
 		player.hasDiscarded = true;
-		$socket?.emit(SocketEvent.PLAYER_DISCARD, player);
 	};
 
-	const showAnswerForm = () => (isAnswerForm = true);
+	const enter = () => {
+		$socket?.emit(SocketEvent.PLAYER_ENTER, player.name);
+		player.hasEntered = true;
+	};
 
 	const reset = () => {
 		player = { ...initialPlayer };
-		isAnswerForm = false;
 	};
 
 	onMount(() => {
@@ -44,10 +46,10 @@
 <div class="flex flex-col items-center justify-center min-h-[100vh]">
 	<div class="flex flex-col gap-6 w-full max-w-[400px]">
 		<h2 class="text-3xl text-center font-bold mb-3">
-			{isAnswerForm ? 'Tava Atbilde' : 'Tavs Vārds'}
+			{player.hasEntered && player.name ? 'Tava Atbilde' : 'Tavs Vārds'}
 		</h2>
 
-		{#if isAnswerForm}
+		{#if player.hasEntered && player.name}
 			<Input
 				bind:value={player.answer}
 				disabled={player.hasDiscarded}
@@ -62,7 +64,7 @@
 			>
 		{:else}
 			<Input bind:value={player.name} placeholder="Vārds Uzvārds" />
-			<Button on:click={showAnswerForm} disabled={!player.name}>Ienākt</Button>
+			<Button on:click={enter} disabled={!player.name}>Ienākt</Button>
 		{/if}
 	</div>
 </div>

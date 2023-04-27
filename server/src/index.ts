@@ -46,10 +46,20 @@ io.use(function (socket, next) {
 io.on('connection', (socket) => {
 	console.log(`${socket.id} connected`);
 
-	socket.on(SocketEvent.PLAYER_SUBMIT, (player: Player) => {
-		const newPlayer = { id: socket.id, ...player };
+	const isAdmin = admins.includes(socket.id);
+
+	socket.on(SocketEvent.PLAYER_ENTER, (name: string) => {
+		const newPlayer = { id: socket.id, name };
 		players.push(newPlayer);
-		io.to(admins).emit(SocketEvent.PLAYER_SUBMITTED, newPlayer);
+		io.to(admins).emit(SocketEvent.PLAYER_ENTERED, newPlayer);
+	});
+
+	socket.on(SocketEvent.PLAYER_SUBMIT, (answer: string) => {
+		players = players.map((player) =>
+			player.id === socket.id ? { ...player, answer } : player
+		);
+
+		io.to(admins).emit(SocketEvent.PLAYER_SUBMITTED, socket.id, answer);
 	});
 
 	socket.on(SocketEvent.PLAYER_DISCARD, () => {
@@ -68,11 +78,13 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on(SocketEvent.GET_PLAYERS, (callback) => {
-		callback({ players });
+		if (isAdmin) {
+			callback({ players });
+		}
 	});
 
 	socket.on(SocketEvent.REMOVE_PLAYERS, (ids?: string[]) => {
-		if (admins.includes(socket.id)) {
+		if (isAdmin) {
 			const playerIds = players.map(({ id }) => id);
 
 			players = ids ? players.filter((player) => !ids.includes(player.id)) : [];
@@ -83,7 +95,7 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on('disconnect', () => {
-		if (admins.includes(socket.id)) {
+		if (isAdmin) {
 			admins = admins.filter((admin) => admin !== socket.id);
 		}
 

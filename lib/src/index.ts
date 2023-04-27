@@ -1,4 +1,6 @@
 export enum SocketEvent {
+	PLAYER_ENTER = 'player:enter',
+	PLAYER_ENTERED = 'player:entered',
 	PLAYER_SUBMIT = 'player:submit',
 	PLAYER_SUBMITTED = 'player:submitted',
 	PLAYER_DISCARD = 'player:discard',
@@ -12,14 +14,13 @@ export enum SocketEvent {
 export type SocketEventGetPlayersResponse = {
 	players: IdentifiedPlayer[];
 };
-
 export interface Player {
 	name: string;
-	answer: string | number;
+	answer?: string | number;
+	hasEntered?: boolean;
 	hasAnswered?: boolean;
 	hasDiscarded?: boolean;
 }
-
 export type IdentifiedPlayer = {
 	id: string;
 } & Player;

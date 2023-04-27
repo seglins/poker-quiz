@@ -21,11 +21,13 @@
 
 {#if player}
 	<h3 class="text-xl font-bold mb-3">{player.name}</h3>
-	<p
-		class="text-4xl font-bold"
-		class:text-destructive={player.hasDiscarded}
-		class:opacity-50={player.hasDiscarded}
-	>
-		{player.answer}
-	</p>
+	{#if player.answer}
+		<p
+			class="text-4xl font-bold"
+			class:text-destructive={player.hasDiscarded}
+			class:opacity-50={player.hasDiscarded}
+		>
+			{player.answer}
+		</p>
+	{/if}
 {/if}
