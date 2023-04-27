@@ -8,7 +8,10 @@
 		"require": "./build/cjs/index.js"
 	},
 	"scripts": {
-		"build": "tsc --module commonjs --outDir ./build/cjs && tsc --module es6 --outDir ./build/esm"
+		"watch": "pnpm build:cjs --watch & pnpm build:esm --watch",
+		"build": "pnpm build:cjs && pnpm build:esm",
+		"build:cjs": "tsc --module commonjs --outDir ./build/cjs",
+		"build:esm": " tsc --module es6 --outDir ./build/esm"
 	},
 	"devDependencies": {
 		"typescript": "^5.0.0"
